@@ -15,7 +15,7 @@
     $myDB = new mysqli('localhost', 'root', '', 'library');
 
     if ($myDB->connect_errno) {
-        die('Connect Error (' . $myDB->connect_error. ')' . $myDB->connect_error);
+        die('Connect Error (' . $myDB->connect_errno. ')' . $myDB->connect_error);
     }
 
     if ($title != '') {

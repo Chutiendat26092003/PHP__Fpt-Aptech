@@ -2,7 +2,7 @@
     $myDB = new mysqli('localhost', 'root', '', 'library');
 
     if ($myDB->connect_errno) {
-        die('Connect Error (' . $myDB->connect_error. ')' . $myDB->connect_error);
+        die('Connect Error (' . $myDB->connect_errno. ')' . $myDB->connect_error);
     }
     $sql = "SELECT * FROM books WHERE available = 1 ORDER BY title";
     $result = $myDB->query($sql);
