@@ -1,28 +1,27 @@
 <?php
-if(isset($_POST["id"]) && !empty($_POST["id"])) {
-    require_once 'config.php';
+    if (isset($_POST["bookid"]) && !empty($_POST["bookid"])) {
+       require_once 'config.php';
 
-    $sql = "DELETE FROM employees WHERE id=?";
+       $sql = "DELETE FROM books WHERE bookid = ?";
+       if ($stmt = mysqli_prepare($link, $sql)) {
+           mysqli_stmt_bind_param($stmt, "i", $param_id);
+           $param_id = trim($_POST["bookid"]);
 
-    if($stmt = mysqli_prepare($link, $sql)) {
-        mysqli_stmt_bind_param($stmt, "i", $param_id);
+           if(mysqli_stmt_execute($stmt)) {
+               header('localhost : index.html');
+               exit();
+           } else {
+               echo "Oops! Something went wrong. Please try again later.";
+           }
+       }
+        mysqli_stmt_close($stmt);
 
-        $param_id = trim($_POST["id"]);
-
-        if(mysqli_stmt_execute($stmt)) {
-            header("location: index.php");
+    } else {
+        if(empty(trim($_GET["id"]))) {
+            header("location: error.php");
             exit();
-        } else {
-            echo "Oops! Something went wrong. Please try again later.";
         }
     }
-    mysqli_stmt_close($stmt);
-} else {
-    if(empty(trim($_GET["id"]))) {
-        header("location: error.php");
-        exit();
-    }
-}
 ?>
 
 <!doctype html>
@@ -53,7 +52,7 @@ if(isset($_POST["id"]) && !empty($_POST["id"])) {
                 </div>
                 <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
                     <div class="alert alert-danger fade in">
-                        <input type="hidden" name="id" value="<?php echo trim($_GET["id"]);?>">
+                        <input type="text" name="bookid" value="<?php echo trim($_GET["bookid"]);?>">
                         <p>Are you sure you want to delete this record?</p> <br>
                         <p>
                             <input type="submit" class="btn btn-danger" value="Yes">
@@ -67,4 +66,3 @@ if(isset($_POST["id"]) && !empty($_POST["id"])) {
 </div>
 </body>
 </html>
-

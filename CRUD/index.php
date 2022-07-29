@@ -12,6 +12,7 @@
     <style type="text/css">
         .wrapper {
             width: 650px;
+            margin: 0 auto;
         }
         .page-header h2 {
             margin-top: 0;
@@ -19,6 +20,13 @@
         table tr td:last-child a{
             margin-right: 15px;
         }
+        .title {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+
+        }
+
     </style>
     <script type="text/javascript">
         $(document).ready(function () {
@@ -31,9 +39,10 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
-                <div class="page-header clearfix">
-                    <h2 class="pull-left">Employee Details</h2>
-                    <a href="create.php" class="btn btn-success pull-right">Add New Employee</a>
+                <div class="page-header clearfix title">
+                    <a href="search.php" class="btn btn-warning pull">Search Employee</a>
+                    <h2 class="pull">Employee Details</h2>
+                    <a href="create.php" class="btn btn-success pull">Add New Employee</a>
                 </div>
                 <?php
                     require_once 'config.php';
